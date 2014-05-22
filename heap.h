@@ -28,9 +28,11 @@ int heap_maximum(IntegerHeap *heap);
 int heap_extract_max(IntegerHeap *heap);
 void heap_increase_key(IntegerHeap *heap, int i, int key);
 void heap_max_heap_insert(IntegerHeap *heap, int key);
+void heap_max_heap_delete(IntegerHeap *heap, int i);
 int heap_minimum(IntegerHeap *heap);
 int heap_extract_min(IntegerHeap *heap);
 void heap_decrease_key(IntegerHeap *heap, int i, int key);
 void heap_min_heap_insert(IntegerHeap *heap, int key);
+void heap_min_heap_delete(IntegerHeap *heap, int i);
 
 #endif

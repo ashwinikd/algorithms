@@ -10,13 +10,19 @@ Ashwini Kumar Dhekane<ashwini@ashwinidhekane.com>
 
 void sort_insertion(int *input, int size);
 void sort_merge(int *input, int size);
+void sort_quick(int *input, int size);
+void sort_bubble(int *input, int size);
+int search_binary(int *input, int key, int size);
+int count_inversion(int *input, int size);
 void _merge_sort(int *input, int start, int end);
 void _merge(int *input, int p, int q, int r);
-int search_binary(int *input, int key, int size);
 int _search_binary(int *input, int key, int start, int end);
-void sort_bubble(int *input, int size);
-int count_inversion(int *input, int size);
 int _count_inversion(int *input, int start, int end);
 int _count_inversion_merge(int *input, int p, int q, int r);
+int _sort_quick_partition(int *input, int p, int r);
+void _sort_quick(int *input, int p, int r);
+int _sort_quick_partition_rand(int *input, int p, int r);
+int _sort_quick_partition_hoare(int *input, int p, int r);
+int _rand_between(int lo, int hi);
 
 #endif

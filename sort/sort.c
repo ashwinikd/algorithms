@@ -45,6 +45,10 @@ int count_inversion(int *input, int size) {
     return _count_inversion(input, 0, size - 1);
 }
 
+void sort_quick(int *input, int size) {
+    _sort_quick(input, 0, size - 1);
+}
+
 int _search_binary(int *input, int key, int start, int end) {
     if(start == end && input[start] == key) {
         return start;
@@ -165,3 +169,98 @@ int _count_inversion_merge(int *input, int p, int q, int r) {
 	free(R);
     return count;
 }
+
+void _sort_quick(int *input, int p, int r) {
+    if (p < r) {
+        int q = _sort_quick_partition_rand(input, p, r);
+        _sort_quick(input, p, q - 1);
+        _sort_quick(input, q + 1, r);
+    }
+}
+
+int _sort_quick_partition(int *input, int p, int r) {
+    int pivot = input[r];
+    int i = p - 1;
+    
+    int j = p;
+    
+    for (; j < r; j++) {
+        if (input[j] <= pivot) {
+            i++;
+            int tmp = input[j];
+            input[j] = input[i];
+            input[i] = tmp;
+        }
+    }
+    
+    int tmp = input[++i];
+    input[i] = input[j];
+    input[j] = tmp;
+    
+    return i;
+}
+
+int _sort_quick_partition_rand(int *input, int p, int r) {
+    int rand = _rand_between(p, r);
+    int tmp = input[r];
+    input[r] = input[rand];
+    input[rand] = tmp;
+    int pivot = input[r];
+    int i = p - 1;
+    
+    int j = p;
+    
+    for (; j < r; j++) {
+        if (input[j] <= pivot) {
+            i++;
+            tmp = input[j];
+            input[j] = input[i];
+            input[i] = tmp;
+        }
+    }
+    
+    tmp = input[++i];
+    input[i] = input[j];
+    input[j] = tmp;
+    
+    return i;
+}
+
+int _sort_quick_partition_hoare(int *input, int p, int r) {
+    int pivot = input[p];
+    int i = p - 1;
+    int j = r + 1;
+    while (1) {
+        while (1) {
+            j--;
+            if (input[j] <= pivot) {
+                break;
+            }
+        }
+        
+        while (1) {
+            i++;
+            if (input[i] >= pivot) {
+                break;
+            }
+        }
+        
+        if (i < j) {
+            int tmp = input[i];
+            input[i] = input[j];
+            input[j] = tmp;
+        } else {
+            return j;
+        }
+    }
+}
+
+int _rand_between(int lo, int hi) {
+    if (lo >= hi) {
+        return lo;
+    }
+    int delta = hi - lo;
+    
+    return lo + (rand() % delta);
+}
+

@@ -40,7 +40,7 @@ int main(int argc, const char * argv[])
     result = maxsubarray_linear(arr, 8);
     printf("left: %d, right: %d, sum: %d\n", result.lo, result.hi, result.sum);
     
-    heap_sort_desc(arr, 10);
+    sort_quick(arr, 10);
     for (int i = 0; i < 10; i++) {
         printf("%d \n", arr[i]);
     }

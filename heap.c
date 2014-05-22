@@ -148,19 +148,27 @@ void heap_increase_key(IntegerHeap *heap, int i, int key) {
     heap->keys[i] = key;
     
     int j = i;
-    while (heap->keys[j] > heap->keys[heap_get_parent(heap, j)]) {
+    while (heap->keys[i] > heap->keys[heap_get_parent(heap, j)]) {
         int p = heap_get_parent(heap, j);
-        int tmp = heap->keys[j];
         heap->keys[j] = heap->keys[p];
-        heap->keys[p] = tmp;
         j = p;
     }
+    heap->keys[j] = heap->keys[i];
 }
 
 void heap_max_heap_insert(IntegerHeap *heap, int key) {
     heap->size++;
     heap->keys[heap->size - 1] = INT_MIN;
     heap_increase_key(heap, heap->size - 1, key);
+}
+
+void heap_max_heap_delete(IntegerHeap *heap, int i) {
+    if (i >= heap->size) {
+        return;
+    }
+    heap->keys[i] = heap->keys[heap->size - 1];
+    heap->size--;
+    _heap_max_heapify(heap, i);
 }
 
 int heap_minimum(IntegerHeap *heap) {
@@ -189,13 +197,13 @@ void heap_decrease_key(IntegerHeap *heap, int i, int key) {
     heap->keys[i] = key;
     
     int j = i;
-    while (heap->keys[j] < heap->keys[heap_get_parent(heap, j)]) {
+    while (heap->keys[i] < heap->keys[heap_get_parent(heap, j)]) {
         int p = heap_get_parent(heap, j);
-        int tmp = heap->keys[j];
         heap->keys[j] = heap->keys[p];
-        heap->keys[p] = tmp;
         j = p;
     }
+    
+    heap->keys[j] = heap->keys[i];
 }
 
 void heap_in_heap_insert(IntegerHeap *heap, int key) {
@@ -204,7 +212,14 @@ void heap_in_heap_insert(IntegerHeap *heap, int key) {
     heap_decrease_key(heap, heap->size - 1, key);
 }
 
-
+void heap_min_heap_delete(IntegerHeap *heap, int i) {
+    if (i >= heap->size) {
+        return;
+    }
+    heap->keys[i] = heap->keys[heap->size - 1];
+    heap->size--;
+    _heap_min_heapify(heap, i);
+}
 
 
 

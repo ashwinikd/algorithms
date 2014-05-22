@@ -1,9 +1,19 @@
 /**
- * Functions for sorting integers. All functions sort in ascending
- * order unless stated otherwise.
- *
+ * @file sort.h
  * @author Ashwini Kumar Dhekane<ashwini@ashwinidhekane.com>
+ * @date 20 May 2014
+ *
+ * Functions for sorting integers. All functions sort in ascending
+ * order unless stated otherwise. Following algorithms are declared:
+ *   - Insertion Sort
+ *   - Merge Sort
+ *   - Quick Sort
+ *   - Bubble Sort
+ *   - Binary Search
+ *   - Inversion Count
  */
+
+
 
 #ifndef __AKD_SORT_H__
 #define __AKD_SORT_H__
@@ -119,6 +129,12 @@ void sort_bubble(int *input, int size);
  */
 int search_binary(int *input, int key, int size);
 
+/**
+ * _search_binary - implementation of recursive algorithm for binary search
+ *   on a sorted array.
+ */
+int _search_binary(int *input, int key, int start, int end);
+
 
 
 ///////////////////////////////////////////////////////////////////////
@@ -129,12 +145,6 @@ int search_binary(int *input, int key, int size);
  * count_inversion - count number of inversions in an array of a given size.
  */
 int count_inversion(int *input, int size);
-
-/**
- * _search_binary - implementation of recursive algorithm for binary search
- *   on a sorted array.
- */
-int _search_binary(int *input, int key, int start, int end);
 
 /**
  * _count_inversion - implementation of recursive algorithm for counting

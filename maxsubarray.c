@@ -19,54 +19,51 @@ maxsubarray_result maxsubarray_linear(int *input, int size) {
     result.sum = input[0];
     
     maxsubarray_result _result;
-    _result.lo = -1;
-    _result.hi = -1;
-    _result.sum = 0;
+    _result.lo = result.lo;
+    _result.hi = result.hi;
+    _result.sum = result.sum;
     
     int remaining_sum = 0;
     
     for (int i = 1; i < size; i++) {
-        if (_result.lo < 0) {
-            if (input[i] >= 0) {
-                result.hi = i;
-                result.sum += input[i];
-                remaining_sum = 0;
+        int sum = result.sum + remaining_sum + input[i];
+        int adjacent_sum = _result.sum + input[i];
+        if (sum >= input[i] && sum >= adjacent_sum && sum >= result.sum) {
+            // input[result.lo ... i] is the max subarray
+            result.hi = i;
+            result.sum = sum;
+            _result.lo = result.lo;
+            _result.hi = i;
+            _result.sum = sum;
+            remaining_sum = 0;
+        } else if (adjacent_sum >= sum && adjacent_sum >= input[i] && adjacent_sum >= result.sum) {
+            // input[_result.lo ... i] is the max subarray
+            result.lo = _result.lo;
+            result.hi = i;
+            result.sum = adjacent_sum;
+            _result.hi = i;
+            _result.sum = adjacent_sum;
+            remaining_sum = 0;
+        } else if (result.sum >= sum && result.sum >= adjacent_sum && result.sum >= input[i]) {
+            // input[result.lo ... result.hi] is the max subarray
+            remaining_sum += input[i];
+            if (adjacent_sum >= input[i]) {
+                _result.hi = i;
+                _result.sum = adjacent_sum;
             } else {
-                remaining_sum += input[i];
                 _result.lo = i;
                 _result.hi = i;
                 _result.sum = input[i];
             }
         } else {
-            int curr_sum = _result.sum + input[i];
-            
-            if (curr_sum >= input[i] && curr_sum >= result.sum) {
-                result.lo = _result.lo;
-                result.hi = i;
-                result.sum = curr_sum;
-                _result.lo = -1;
-                _result.hi = -1;
-                _result.sum = 0;
-                remaining_sum = 0;
-            } else if (input[i] >= curr_sum && input[i] >= result.sum) {
-                result.lo = i;
-                result.hi = i;
-                result.sum = input[i];
-                _result.lo = -1;
-                _result.hi = -1;
-                _result.sum = 0;
-                remaining_sum = 0;
-            } else {
-                remaining_sum += input[i];
-                if (input[i] <= 0) {
-                    _result.lo = i;
-                    _result.hi = i;
-                    _result.sum = input[i];
-                } else {
-                    _result.hi = i;
-                    _result.sum += input[i];
-                }
-            }
+            // input[i ... i] is the max subarray
+            result.lo = i;
+            result.hi = i;
+            result.sum = input[i];
+            _result.lo = i;
+            _result.hi = i;
+            _result.sum = input[i];
+            remaining_sum = 0;
         }
     }
     

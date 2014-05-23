@@ -60,15 +60,18 @@ MaxsubarrayResult _maxsubarray(int *input, int lo, int hi) {
 
 /**
  * _maxsubarray_crossing - returns the maximum subarray of input[lo ... hi]
- * which crosses the mid point. 
+ * which crosses the mid point. This works by starting at the mid index and
+ * moving in both directions while calculating the maximum sum of the left
+ * and right part which includes the mid key.
  */
 MaxsubarrayResult _maxsubarray_crossing(int *input, int lo, int mid, int hi) {
-    int max_left = mid;
-    int max_right = mid + 1;
-    int left_sum = input[mid];
-    int right_sum = input[mid + 1];
+    int max_left = mid;              // at the end [max_left ... mid] will have max sum in left
+    int max_right = mid + 1;         // at the end [mid+1 ... max_right] will have max sum in right
+    int left_sum = input[mid];       // tracks the max sum for left part
+    int right_sum = input[mid + 1];  // tracks the max sum for right part
     
-    int sum = left_sum;
+    // calculate the max sum of left and associated index
+    int sum = left_sum; // tracks the sum of left part
     for (int i = mid - 1; i >= lo; i--) {
         sum += input[i];
         if (left_sum < sum) {
@@ -77,7 +80,8 @@ MaxsubarrayResult _maxsubarray_crossing(int *input, int lo, int mid, int hi) {
         }
     }
     
-    sum = right_sum;
+    // calculate the max sum of right and associated index
+    sum = right_sum; // tracks the sum of right part
     for (int i = mid + 2; i <= hi; i++) {
         sum += input[i];
         if (right_sum < sum) {

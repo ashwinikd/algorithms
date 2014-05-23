@@ -104,6 +104,46 @@ MaxsubarrayResult _maxsubarray_crossing(int *input, int lo, int mid, int hi) {
 ////////////////////////// LINEAR [O(n)] //////////////////////////////
 ///////////////////////////////////////////////////////////////////////
 
+/**
+ * maxsubarray_linear - calculates the maximum subarray in O(n). 
+ * 
+ * Algorithm:
+ * We traverse the array from start to end and keep track of the
+ * maximum subarray that we have encountered so far (lo, hi, sum). Other
+ * than this we keep track of remaining sum (r) i.e. the sum of keys 
+ * which occur after last index of maximum subarray upto the last key
+ * before current key. We track another maximum subarray which
+ * includes the last key (local_lo, i-1, local_sum).
+ * 
+ *     current_maxsubarray = (lo, hi, sum)
+ *     remaining_sum       = r
+ *     local_maxsubarray   = (local_lo, i - 1, local_sum)
+ *     current_index       = i
+ *     current_key         = key
+ * 
+ * The maximum subarray of A[0 ... i] is one of the following:
+ *
+ *     (lo, hi, sum)
+ *     (lo, i, sum+r+key)
+ *     (local_lo, i, local_sum+key)
+ *     (i, i, key)
+ *
+ * We determine the correct subarray by compairing their sums. We
+ * also update r and local_maxsubarray accordingly as we move forward.
+ *
+ * Note that:
+ *     hi < local_lo < i
+ * and we are not including any subarray of form (p, q, _sum) where
+ *     _sum = sum of keys in A[p ... q]
+ *     lo < p <= hi
+ *     p <= q < i
+ * We discard this subarray because
+ *     _sum <= sum
+ * 
+ * At the end of every i^th iteration we have the maximum subarray
+ * of A[0 ... i]. Hence when the loop terminates at i = size we have
+ * the maximum subarray of A[0 ... size-1] which is our input array.
+ */
 MaxsubarrayResult maxsubarray_linear(int *input, int size) {
     MaxsubarrayResult result;
     result.lo = 0;

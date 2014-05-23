@@ -1,7 +1,7 @@
-# Algorithm and Data-Structures
+# Algorithms and Data-Structures
 
-This repo contains implementations of some basic algorithm and DS. This is a work in progress.
-As of now following algorithm have been implemented:
+This repo contains implementations of some basic algorithms and DS. This is a work in progress.
+As of now following algorithms have been implemented:
 
 * Sort
   * Insertion Sort
@@ -14,3 +14,7 @@ As of now following algorithm have been implemented:
   * Naive matrix multiplication
   * Inversion counting in an array
   * Maximum subarray problem
+
+## Targets
+* Test cases
+* Profiling

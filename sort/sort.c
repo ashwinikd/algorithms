@@ -348,41 +348,71 @@ int _search_binary(int *input, int key, int start, int end) {
 ///////////////////////// INVERSION COUNT /////////////////////////////
 ///////////////////////////////////////////////////////////////////////
 
+/**
+ * count_inversion - returns the number of inversions in an array.
+ *   This calls _count_inversion with full index range of array and
+ *   returns its result. Note that this function will sort the input
+ *   array in ascending order. If you want to preserve the order
+ *   then pass a copy of array.
+ */
 int count_inversion(int *input, int size) {
     return _count_inversion(input, 0, size - 1);
 }
 
+/**
+ * _count_inversion - implementation of inversion counting algorithm
+ *   based on merge sort. This will divide the array into two equal
+ *   halves and counts the inversions within them recursively. Then
+ *   we calculate the inversions between the two halves using
+ *   _count_inversion_merge. The total inversions in the array are
+ *
+ *   num_left_inversions + num_right_inversion + num_merge_inversions
+ */
 int _count_inversion(int *input, int start, int end) {
     if (start < end) {
         int mid = (start + end) / 2;
-        int c_l = _count_inversion(input, start, mid);
-        int c_r = _count_inversion(input, mid + 1, end);
-        int c_m = _count_inversion_merge(input, start, mid, end);
-        return c_l + c_r + c_m;
+        return _count_inversion(input, start, mid) +           // num left
+               _count_inversion(input, mid + 1, end) +         // num right
+               _count_inversion_merge(input, start, mid, end); // num merge
     }
-    return 0;
+    return 0; // if size <=1 we have 0 inversions
 }
 
+/**
+ * _count_inversion_merge - returns the number of inversions between
+ *   the keys of input[p ... q] and input[q+1 ... r].
+ */
 int _count_inversion_merge(int *input, int p, int q, int r) {
-    int count = 0;
-    int size_l = q - p + 1;
-	int size_r = r - q;
+    int count = 0; // counter for number of inversion
+    
+    int size_l = q - p + 1; // size of left array
+	int size_r = r - q;     // size of right array
+    
+    // allocate and copy left and right arrays
 	int *L = malloc(sizeof(int) * (size_l));
 	int *R = malloc(sizeof(int) * (size_r));
+    
 	for(int i = 0; i < size_l; i++) {
 		L[i] = input[p + i];
 	}
 	for(int i = 0; i < size_r; i++) {
 		R[i] = input[q + i + 1];
 	}
-	int i = 0;
-	int j = 0;
-    int k = p;
+    
+	int i = 0;  // index for left array
+	int j = 0;  // index for right array
+    int k = p;  // index for result array
+    
 	for(k = p; k <= r; k++) {
         if(i >= size_l || j >= size_r) {
             break;
         }
 		if(L[i] <= R[j]) {
+            /*
+             * we add j here to count because this element is greater
+             * than j element which were to its right and hence count
+             * as j inversions.
+             */
             count += j;
             input[k] = L[i++];
 		} else {
@@ -397,6 +427,10 @@ int _count_inversion_merge(int *input, int p, int q, int r) {
     
     if(j == size_r) {
         for (; k <= r; k++) {
+            /*
+             * similarly as above we add j to the inversion count here
+             * too.
+             */
             count += j;
             input[k] = L[i++];
         }

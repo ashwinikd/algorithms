@@ -23,6 +23,7 @@ them some time soon.
 * Strassen's Algorithm for multiplying n-by-kn and kn-by-n matrices
 * Merge sort with insertion sort at small size
 * Quick sort with insertion sort at small size
+* Heap which allows its capacity to be changed at runtime
 
 ## Targets
 * Documentation and comments

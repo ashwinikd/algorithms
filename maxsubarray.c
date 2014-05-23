@@ -145,21 +145,28 @@ MaxsubarrayResult _maxsubarray_crossing(int *input, int lo, int mid, int hi) {
  * the maximum subarray of A[0 ... size-1] which is our input array.
  */
 MaxsubarrayResult maxsubarray_linear(int *input, int size) {
+    // the current maximum subarray. Initialize this with
+    // the first element of the array
     MaxsubarrayResult result;
     result.lo = 0;
     result.hi = 0;
     result.sum = input[0];
     
+    // the local maximum subarray. Initialize this with the
+    // current maximum subarray because local max subarray is
+    // the maximum subarray.
     MaxsubarrayResult _result;
     _result.lo = result.lo;
     _result.hi = result.hi;
     _result.sum = result.sum;
     
-    int remaining_sum = 0;
+    int remaining_sum = 0; // remaining sum
     
-    for (int i = 1; i < size; i++) {
-        int sum = result.sum + remaining_sum + input[i];
-        int adjacent_sum = _result.sum + input[i];
+    for (int i = 1; i < size; i++) { // starts with second element
+        
+        int sum = result.sum + remaining_sum + input[i]; // sum + r + key
+        int adjacent_sum = _result.sum + input[i];       // local_sum + key
+        
         if (sum >= input[i] && sum >= adjacent_sum && sum >= result.sum) {
             // input[result.lo ... i] is the max subarray
             result.hi = i;

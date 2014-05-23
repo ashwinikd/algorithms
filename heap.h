@@ -6,8 +6,8 @@
 //  Copyright (c) 2014 ___ASHWINIKD___. All rights reserved.
 //
 
-#ifndef algo_heap_h
-#define algo_heap_h
+#ifndef __AKD_ALGO_HEAP_H__
+#define __AKD_ALGO_HEAP_H__
 
 typedef struct {
     int *keys;

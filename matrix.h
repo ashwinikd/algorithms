@@ -6,8 +6,8 @@
  * Functions for matrix multiplication
  */
 
-#ifndef __AKD_MATRIX_H__
-#define __AKD_MATRIX_H__
+#ifndef __AKD_ALGO_MATRIX_H__
+#define __AKD_ALGO_MATRIX_H__
 
 #define MATRIX_MULTIPLY_ERROR 1
 #define MATRIX_MULTIPLY_SUCCESS 0
@@ -23,6 +23,8 @@
  *   Returns MATRIX_MULTIPLY_SUCCESS if multiplication was successful
  *   or MATRIX_MULTIPLY_ERROR otherwise.
  */
-int matrix_multiply_naive(int * A, int row_a, int col_a, int * B, int row_b, int col_b, int* result);
+int matrix_multiply_naive(int * A, int row_a, int col_a,
+                          int * B, int row_b, int col_b,
+                          int* result);
 
 #endif

@@ -1,10 +1,10 @@
-//
-//  matrix.c
-//  algo
-//
-//  Created by Ashwini Dhekane on 21/05/14.
-//  Copyright (c) 2014 ___ASHWINIKD___. All rights reserved.
-//
+/**
+ * @file matrix.c
+ * @author Ashwini Dhekane<ashwini@ashwinidhekane.com>
+ * @date 21 May 2014
+ *
+ * Functions for matrix multiplication
+ */
 
 #include "matrix.h"
 

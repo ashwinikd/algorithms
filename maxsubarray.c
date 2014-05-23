@@ -13,24 +13,41 @@
 /////////////////// DIVIDE & CONQUER [O(n*lg(n)] //////////////////////
 ///////////////////////////////////////////////////////////////////////
 
-maxsubarray_result maxsubarray(int *input, int size) {
+/**
+ * maxsubarray - calculates maximum subarray or given array
+ * in O(n*lg(n)) time. This calls _maxsubarray on complete
+ * range of the input array and returns its result.
+ */
+MaxsubarrayResult maxsubarray(int *input, int size) {
     return _maxsubarray(input, 0, size - 1);
 }
 
-maxsubarray_result _maxsubarray(int *input, int lo, int hi) {
-    maxsubarray_result result;
+/**
+ * _maxsubarray - finds maximum subarray of range input[lo ... hi]
+ * by recursively dividing the range into two equal halves. Then it
+ * calculates the maximum subarray which crosses the mid point
+ * using _maxsubarray_crossing. The result is the maximum of the
+ * three viz. maxsubarray of left, maxsubarray or right or 
+ * maxsubarray which crosses mid point.
+ */
+MaxsubarrayResult _maxsubarray(int *input, int lo, int hi) {
+    MaxsubarrayResult result;
     
-    if (lo == hi) {
+    if (lo == hi) { // if lo==hi we have single element (trivial)
         result.lo = lo;
         result.hi = lo;
         result.sum = input[hi];
         return result;
     }
     
+    // divide the array into two equal halves
     int mid = (lo + hi) / 2;
-    maxsubarray_result left = _maxsubarray(input, lo, mid);
-    maxsubarray_result right = _maxsubarray(input, mid + 1, hi);
-    maxsubarray_result cross = _maxsubarray_crossing(input, lo, mid, hi);
+    MaxsubarrayResult left = _maxsubarray(input, lo, mid);      // left half
+    MaxsubarrayResult right = _maxsubarray(input, mid + 1, hi); // right half
+    
+    MaxsubarrayResult cross = _maxsubarray_crossing(input, lo, mid, hi); // maxsubarray of cross
+    
+    // return the maximum
     
     if (left.sum >= right.sum && left.sum >= cross.sum) {
         return left;
@@ -41,7 +58,11 @@ maxsubarray_result _maxsubarray(int *input, int lo, int hi) {
     }
 }
 
-maxsubarray_result _maxsubarray_crossing(int *input, int lo, int mid, int hi) {
+/**
+ * _maxsubarray_crossing - returns the maximum subarray of input[lo ... hi]
+ * which crosses the mid point. 
+ */
+MaxsubarrayResult _maxsubarray_crossing(int *input, int lo, int mid, int hi) {
     int max_left = mid;
     int max_right = mid + 1;
     int left_sum = input[mid];
@@ -65,7 +86,7 @@ maxsubarray_result _maxsubarray_crossing(int *input, int lo, int mid, int hi) {
         }
     }
     
-    maxsubarray_result result;
+    MaxsubarrayResult result;
     result.lo = max_left;
     result.hi = max_right;
     result.sum = left_sum + right_sum;
@@ -79,13 +100,13 @@ maxsubarray_result _maxsubarray_crossing(int *input, int lo, int mid, int hi) {
 ////////////////////////// LINEAR [O(n)] //////////////////////////////
 ///////////////////////////////////////////////////////////////////////
 
-maxsubarray_result maxsubarray_linear(int *input, int size) {
-    maxsubarray_result result;
+MaxsubarrayResult maxsubarray_linear(int *input, int size) {
+    MaxsubarrayResult result;
     result.lo = 0;
     result.hi = 0;
     result.sum = input[0];
     
-    maxsubarray_result _result;
+    MaxsubarrayResult _result;
     _result.lo = result.lo;
     _result.hi = result.hi;
     _result.sum = result.sum;

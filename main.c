@@ -34,7 +34,7 @@ int main(int argc, const char * argv[])
     //        printf("%d \n", arr[i]);
     //    }
     
-    maxsubarray_result result = maxsubarray(arr, 8);
+    MaxsubarrayResult result = maxsubarray(arr, 8);
     printf("left: %d, right: %d, sum: %d\n", result.lo, result.hi, result.sum);
     
     result = maxsubarray_linear(arr, 8);

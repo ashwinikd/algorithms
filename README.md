@@ -14,7 +14,9 @@ As of now following algorithms have been implemented:
   * Naive matrix multiplication
   * Inversion counting in an array
   * Maximum subarray problem
+  * Binary search on sorted integer arrays
 
 ## Targets
+* Documentation and comments
 * Test cases
 * Profiling

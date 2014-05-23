@@ -1,10 +1,10 @@
-//
-//  heap.h
-//  algo
-//
-//  Created by Ashwini Dhekane on 22/05/14.
-//  Copyright (c) 2014 ___ASHWINIKD___. All rights reserved.
-//
+/**
+ * @file heap.h
+ * @author Ashwini Dhekane<ashwini@ashwinidhekane.com>
+ * @date 23 May 2014
+ *
+ * Heap declarations for Integers.
+ */
 
 #ifndef __AKD_ALGO_HEAP_H__
 #define __AKD_ALGO_HEAP_H__

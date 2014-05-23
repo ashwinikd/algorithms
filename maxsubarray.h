@@ -20,6 +20,11 @@ typedef struct {
     int sum;
 } maxsubarray_result;
 
+
+///////////////////////////////////////////////////////////////////////
+/////////////////// DIVIDE & CONQUER [O(n*lg(n)] //////////////////////
+///////////////////////////////////////////////////////////////////////
+
 /**
  * maxsubarray - returns the maximum subarray using
  * divide and conquer approach. The time complexity of this
@@ -28,22 +33,28 @@ typedef struct {
 maxsubarray_result maxsubarray(int *input, int size);
 
 /**
- * maxsubarray_linear - returns the maximum subarray in linear
- * time O(n).
- */
-maxsubarray_result maxsubarray_linear(int *input, int size);
-
-/**
  * _maxsubarray - implementation of recursive algorithm for
  * calculating the maximum subarray of input[lo ... hi]
  */
 maxsubarray_result _maxsubarray(int *input, int lo, int hi);
 
 /**
- * _maxsubarray_crossing - calculates the maximum subarray 
+ * _maxsubarray_crossing - calculates the maximum subarray
  * which crosses the mid point. This is used as a subroutine
  * by _maxsubarray.
  */
 maxsubarray_result _maxsubarray_crossing(int *input, int lo, int mid, int hi);
+
+
+
+///////////////////////////////////////////////////////////////////////
+////////////////////////// LINEAR [O(n)] //////////////////////////////
+///////////////////////////////////////////////////////////////////////
+
+/**
+ * maxsubarray_linear - returns the maximum subarray in linear
+ * time O(n).
+ */
+maxsubarray_result maxsubarray_linear(int *input, int size);
 
 #endif

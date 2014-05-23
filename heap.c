@@ -1,10 +1,10 @@
-//
-//  heap.c
-//  algo
-//
-//  Created by Ashwini Dhekane on 22/05/14.
-//  Copyright (c) 2014 ___ASHWINIKD___. All rights reserved.
-//
+/**
+ * @file heap.c
+ * @author Ashwini Dhekane<ashwini@ashwinidhekane.com>
+ * @date 23 May 2014
+ *
+ * Implementations for heap functions.
+ */
 
 #include <stdio.h>
 #include "heap.h"
@@ -220,9 +220,3 @@ void heap_min_heap_delete(IntegerHeap *heap, int i) {
     heap->size--;
     _heap_min_heapify(heap, i);
 }
-
-
-
-
-
-

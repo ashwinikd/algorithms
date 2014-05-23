@@ -1,16 +1,83 @@
-//
-//  maxsubarray.c
-//  algo
-//
-//  Created by Ashwini Dhekane on 20/05/14.
-//  Copyright (c) 2014 ___ASHWINIKD___. All rights reserved.
-//
+/**
+ * @file maxsubarray.c
+ * @author Ashwini Dhekane<ashwini@ashwinidhekane.com>
+ * @date 21 May 2014
+ *
+ * Definitions for functions which calculating maximum subarray.
+ */
 
 #include "maxsubarray.h"
+
+
+///////////////////////////////////////////////////////////////////////
+/////////////////// DIVIDE & CONQUER [O(n*lg(n)] //////////////////////
+///////////////////////////////////////////////////////////////////////
 
 maxsubarray_result maxsubarray(int *input, int size) {
     return _maxsubarray(input, 0, size - 1);
 }
+
+maxsubarray_result _maxsubarray(int *input, int lo, int hi) {
+    maxsubarray_result result;
+    
+    if (lo == hi) {
+        result.lo = lo;
+        result.hi = lo;
+        result.sum = input[hi];
+        return result;
+    }
+    
+    int mid = (lo + hi) / 2;
+    maxsubarray_result left = _maxsubarray(input, lo, mid);
+    maxsubarray_result right = _maxsubarray(input, mid + 1, hi);
+    maxsubarray_result cross = _maxsubarray_crossing(input, lo, mid, hi);
+    
+    if (left.sum >= right.sum && left.sum >= cross.sum) {
+        return left;
+    } else if (right.sum >= left.sum && right.sum >= cross.sum) {
+        return right;
+    } else {
+        return cross;
+    }
+}
+
+maxsubarray_result _maxsubarray_crossing(int *input, int lo, int mid, int hi) {
+    int max_left = mid;
+    int max_right = mid + 1;
+    int left_sum = input[mid];
+    int right_sum = input[mid + 1];
+    
+    int sum = left_sum;
+    for (int i = mid - 1; i >= lo; i--) {
+        sum += input[i];
+        if (left_sum < sum) {
+            left_sum = sum;
+            max_left = i;
+        }
+    }
+    
+    sum = right_sum;
+    for (int i = mid + 2; i <= hi; i++) {
+        sum += input[i];
+        if (right_sum < sum) {
+            right_sum = sum;
+            max_right = i;
+        }
+    }
+    
+    maxsubarray_result result;
+    result.lo = max_left;
+    result.hi = max_right;
+    result.sum = left_sum + right_sum;
+    
+    return result;
+}
+
+
+
+///////////////////////////////////////////////////////////////////////
+////////////////////////// LINEAR [O(n)] //////////////////////////////
+///////////////////////////////////////////////////////////////////////
 
 maxsubarray_result maxsubarray_linear(int *input, int size) {
     maxsubarray_result result;
@@ -66,62 +133,6 @@ maxsubarray_result maxsubarray_linear(int *input, int size) {
             remaining_sum = 0;
         }
     }
-    
-    return result;
-}
-
-maxsubarray_result _maxsubarray(int *input, int lo, int hi) {
-    maxsubarray_result result;
-    
-    if (lo == hi) {
-        result.lo = lo;
-        result.hi = lo;
-        result.sum = input[hi];
-        return result;
-    }
-    
-    int mid = (lo + hi) / 2;
-    maxsubarray_result left = _maxsubarray(input, lo, mid);
-    maxsubarray_result right = _maxsubarray(input, mid + 1, hi);
-    maxsubarray_result cross = _maxsubarray_crossing(input, lo, mid, hi);
-    
-    if (left.sum >= right.sum && left.sum >= cross.sum) {
-        return left;
-    } else if (right.sum >= left.sum && right.sum >= cross.sum) {
-        return right;
-    } else {
-        return cross;
-    }
-}
-
-maxsubarray_result _maxsubarray_crossing(int *input, int lo, int mid, int hi) {
-    int max_left = mid;
-    int max_right = mid + 1;
-    int left_sum = input[mid];
-    int right_sum = input[mid + 1];
-    
-    int sum = left_sum;
-    for (int i = mid - 1; i >= lo; i--) {
-        sum += input[i];
-        if (left_sum < sum) {
-            left_sum = sum;
-            max_left = i;
-        }
-    }
-    
-    sum = right_sum;
-    for (int i = mid + 2; i <= hi; i++) {
-        sum += input[i];
-        if (right_sum < sum) {
-            right_sum = sum;
-            max_right = i;
-        }
-    }
-    
-    maxsubarray_result result;
-    result.lo = max_left;
-    result.hi = max_right;
-    result.sum = left_sum + right_sum;
     
     return result;
 }

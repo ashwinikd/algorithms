@@ -46,4 +46,3 @@ int matrix_multiply_naive(int * A, int row_a, int col_a, int * B, int row_b, int
     
     return MATRIX_MULTIPLY_SUCCESS;
 }
-

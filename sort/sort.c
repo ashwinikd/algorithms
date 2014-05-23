@@ -126,7 +126,6 @@ void _merge(int *input, int p, int q, int r) {
             input[k] = R[j++];
         }
     }
-    
     if(j == size_r) {
         for (; k <= r; k++) {
             input[k] = L[i++];
@@ -229,6 +228,16 @@ int _sort_quick_partition_rand(int *input, int p, int r) {
     return i;
 }
 
+/**
+ * _sort_quick_partition_hoare - partition subroutine for quick sort as 
+ *   given by C. A. R. Hoare. This will not work with _sort_quick
+ *   function.
+ *
+ * Reason for hoare partition not working with _sort_quick:
+ * This algorithm returns a value q such that every key in input[p ... q-1] 
+ * is less than or equal to any key in input[q ... r]. It is not necessary
+ * that input[q] is greater than or equal to any key in input[p ... q-1].
+ */
 int _sort_quick_partition_hoare(int *input, int p, int r) {
     int pivot = input[p];
     int i = p - 1;
@@ -264,8 +273,19 @@ int _sort_quick_partition_hoare(int *input, int p, int r) {
 //////////////////////////// BUBBLE SORT //////////////////////////////
 ///////////////////////////////////////////////////////////////////////
 
+/**
+ * sort_bubble - implementation of bubble sort.
+ */
 void sort_bubble(int *input, int size) {
+    /*
+     * Loop invariant: at the beginning of the every
+     *   iteration input[0 ... i] is sorted.
+     */
     for (int i = 0; i < size - 1; i++) {
+        /*
+         * Loop invariant: at the beginning of every iteration
+         *   input[j] <= every key in input [j ... size - 1]
+         */
         for (int j = size - 1; j > i; j--) {
             if(input[j] < input[j - 1]) {
                 int tmp = input[j];
@@ -282,6 +302,13 @@ void sort_bubble(int *input, int size) {
 /////////////////////////// BINARY SEARCH /////////////////////////////
 ///////////////////////////////////////////////////////////////////////
 
+/**
+ * search_binary - implementation of binary search which searches for
+ *   key `key` in array `input` of size `size`. This calls
+ *   _search_binary and returns its result. If the key is not found
+ *   or the size of input array is 0 the result is -1. Otherwise the
+ *   result is the index of key in array.
+ */
 int search_binary(int *input, int key, int size) {
     if(size == 0) {
         return -1;
@@ -289,6 +316,13 @@ int search_binary(int *input, int key, int size) {
     return _search_binary(input, key, 0, size - 1);
 }
 
+/**
+ * _search_binary - implementation of binary search. This searches
+ *   for `key` in the range input[start ... end] by comparing the
+ *   the key with the middle key of the range. If the key is 
+ *   smaller the search continues recursively to the left half
+ *   of the array. Otherwise the search continues to right half.
+ */
 int _search_binary(int *input, int key, int start, int end) {
     if(start == end && input[start] == key) {
         return start;

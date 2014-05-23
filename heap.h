@@ -77,7 +77,9 @@ int heap_extract_max(IntegerHeap *heap);
 
 /**
  * heap_increase_key - increases the key stored at a given node in
- * the heap. It is assumed that this is a max heap.
+ * the heap. It is assumed that this is a max heap. If the new key
+ * is smaller than the current key store in the node this function
+ * will return without making any change.
  */
 void heap_increase_key(IntegerHeap *heap, int i, int key);
 
@@ -123,7 +125,9 @@ int heap_minimum(IntegerHeap *heap);
 
 /**
  * heap_extract_min - removes the minmum key from this heap and
- * returns it. It is assumed that the heap is a min heap.
+ * returns it. It is assumed that the heap is a min heap. If the 
+ * new key is greater than the current key store in the node this 
+ * function will return without making any change.
  */
 int heap_extract_min(IntegerHeap *heap);
 

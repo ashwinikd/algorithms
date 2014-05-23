@@ -2,7 +2,7 @@
  * @file sort.c
  * @author Ashwini Dhekane<ashwini@ashwinidhekane.com>
  * @date 20 May 2014
- * 
+ *
  * Definitions for functions for sorting integers defined in sort.h.
  */
 
@@ -28,9 +28,9 @@ void sort_insertion(int *input, int size) {
 	if(size < 2) {
 		return;
 	}
-
+    
     /*
-     * Loop invariant: At the starting of every iteration 
+     * Loop invariant: At the starting of every iteration
      *   the array input[0 ... i-1] is sorted.
      */
 	for(int i = 1; i < size; i++) {
@@ -144,7 +144,7 @@ void _merge(int *input, int p, int q, int r) {
 ///////////////////////////////////////////////////////////////////////
 
 /**
- * sort_quick - sort an array using quick sort. This calls 
+ * sort_quick - sort an array using quick sort. This calls
  *   _sort_quick which is the actual implementation of quck sort
  *   algorithm.
  */
@@ -155,8 +155,8 @@ void sort_quick(int *input, int size) {
 /**
  * _sort_quick - implementation of quick sort algorithm. This
  *   calculates the pivot point using _sort_quick_partition_rand
- *   and then calls itself recursively on the two partitions. 
- *   This function can use _sort_quick_partion_rand or 
+ *   and then calls itself recursively on the two partitions.
+ *   This function can use _sort_quick_partion_rand or
  *   _sort_quick_partition for calculating the pivot point.
  *   Do not use _sort_quick_partition_hoare for partitioning.
  */
@@ -229,12 +229,12 @@ int _sort_quick_partition_rand(int *input, int p, int r) {
 }
 
 /**
- * _sort_quick_partition_hoare - partition subroutine for quick sort as 
+ * _sort_quick_partition_hoare - partition subroutine for quick sort as
  *   given by C. A. R. Hoare. This will not work with _sort_quick
  *   function.
  *
  * Reason for hoare partition not working with _sort_quick:
- * This algorithm returns a value q such that every key in input[p ... q-1] 
+ * This algorithm returns a value q such that every key in input[p ... q-1]
  * is less than or equal to any key in input[q ... r]. It is not necessary
  * that input[q] is greater than or equal to any key in input[p ... q-1].
  */
@@ -319,7 +319,7 @@ int search_binary(int *input, int key, int size) {
 /**
  * _search_binary - implementation of binary search. This searches
  *   for `key` in the range input[start ... end] by comparing the
- *   the key with the middle key of the range. If the key is 
+ *   the key with the middle key of the range. If the key is
  *   smaller the search continues recursively to the left half
  *   of the array. Otherwise the search continues to right half.
  */
@@ -372,8 +372,8 @@ int _count_inversion(int *input, int start, int end) {
     if (start < end) {
         int mid = (start + end) / 2;
         return _count_inversion(input, start, mid) +           // num left
-               _count_inversion(input, mid + 1, end) +         // num right
-               _count_inversion_merge(input, start, mid, end); // num merge
+        _count_inversion(input, mid + 1, end) +         // num right
+        _count_inversion_merge(input, start, mid, end); // num merge
     }
     return 0; // if size <=1 we have 0 inversions
 }

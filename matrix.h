@@ -17,9 +17,9 @@
  *   B[row_b][col_b] and stores the result in result. There are no
  *   error checks here `result` should be big enough to store the
  *   result of multiplication. The element position is calculated
- *   as 
+ *   as
  *        A[i, j] = i * row_a + j
- * 
+ *
  *   Returns MATRIX_MULTIPLY_SUCCESS if multiplication was successful
  *   or MATRIX_MULTIPLY_ERROR otherwise.
  */

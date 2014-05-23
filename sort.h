@@ -123,7 +123,7 @@ void sort_bubble(int *input, int size);
 
 /**
  * search_binary - search for `key` in sorted array `input` of size `size`.
- * 
+ *
  * Function will return -1 if key is not found or if size is 0. Otherwise
  * the it will return the index of key in the array.
  */

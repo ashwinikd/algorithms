@@ -13,6 +13,7 @@
 #include "heap.h"
 #include "stats.h"
 #include "stack.h"
+#include "queue.h"
 
 void matrix_multiply() {
     int A[4] = {1, 1,
@@ -63,5 +64,15 @@ int main(int argc, const char * argv[])
     stack_pop(&stack, &pop);
     printf("Stack pop: %d\n", pop);
     stack_destroy(&stack);
+    
+    IntegerQueue q;
+    queue_init(&q, 10);
+    
+    queue_enqueue(&q, 10);
+    printf("Dequeue result: %d, Key: %d\n", queue_dequeue(&q, &pop), pop);
+    printf("Dequeue result: %d, Key: %d\n", queue_dequeue(&q, &pop), pop);
+    
+    queue_destroy(&q);
+    
     return 0;
 }

@@ -1,5 +1,5 @@
 /**
- * @file stack.h
+ * @file stack.c
  * @author Ashwini Dhekane<ashwini@ashwinidhekane.com>
  * @date 24 May 2014
  *
@@ -39,7 +39,7 @@ int stack_push(IntegerStack *stack, int key) {
         return STACK_OVERFLOW;
     }
     stack->top += 1;
-    stack->keys[stack->capacity - stack->top - 1] = key;
+    stack->keys[stack->top] = key;
     return STACK_OPN_OK;
 }
 
@@ -52,8 +52,8 @@ int stack_pop(IntegerStack *stack, int *value) {
     if (stack->top < 0) {
         return STACK_UNDERFLOW;
     }
-    printf("Stack element: %d\n", stack->keys[stack->capacity - stack->top - 1]);
-    *value = stack->keys[stack->capacity - stack->top - 1];
+    printf("Stack element: %d\n", stack->keys[stack->top]);
+    *value = stack->keys[stack->top];
     stack->top--;
     return STACK_OPN_OK;
 }

@@ -12,6 +12,7 @@
 #include "matrix.h"
 #include "heap.h"
 #include "stats.h"
+#include "stack.h"
 
 void matrix_multiply() {
     int A[4] = {1, 1,
@@ -50,5 +51,17 @@ int main(int argc, const char * argv[])
     for (int i = 0; i < 10; i++) {
         printf("%d \n", out[i]);
     }
+    
+    IntegerStack stack;
+    stack_init(&stack, 10);
+    stack_push(&stack, 4);
+    stack_push(&stack, 8);
+    stack_push(&stack, -3);
+    printf("Stack top: %d\n", stack.top);
+    int pop = 1;
+    stack_pop(&stack, &pop);
+    stack_pop(&stack, &pop);
+    printf("Stack pop: %d\n", pop);
+    stack_destroy(&stack);
     return 0;
 }

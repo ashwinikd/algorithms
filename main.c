@@ -40,9 +40,10 @@ int main(int argc, const char * argv[])
     result = maxsubarray_linear(arr, 8);
     printf("left: %d, right: %d, sum: %d\n", result.lo, result.hi, result.sum);
     
-    sort_quick(arr, 10);
+    int out[10] = {};
+    sort_counting(arr, 10, -3, 7, out);
     for (int i = 0; i < 10; i++) {
-        printf("%d \n", arr[i]);
+        printf("%d \n", out[i]);
     }
     return 0;
 }

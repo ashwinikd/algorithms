@@ -299,6 +299,37 @@ void sort_bubble(int *input, int size) {
 
 
 ///////////////////////////////////////////////////////////////////////
+////////////////////// SORTING IN LINEAR TIME /////////////////////////
+///////////////////////////////////////////////////////////////////////
+
+/**
+ * sort_counting - sorts the input array with given minimum and maximum
+ * keys and stores the sorted array in output. The sort uses counting
+ * sort to sort the array. There are no error checks output array should
+ * be large enough to store the output.
+ */
+void sort_counting(int *input, int size, int min_key, int max_key, int *output) {
+    int num_keys = max_key - min_key + 1;
+    int *C = calloc(num_keys, sizeof(int));
+    
+    for (int i = 0; i < size; i++) {
+        C[input[i] - min_key] += 1;
+    }
+    
+    for (int i = 1; i < num_keys; i++) {
+        C[i] += C[i - 1];
+    }
+    
+    for (int i = size - 1; i >=0; i--) {
+        output[C[input[i] - min_key] - 1] = input[i];
+        C[input[i] - min_key] -= 1;
+    }
+    
+    free(C);
+}
+
+
+///////////////////////////////////////////////////////////////////////
 /////////////////////////// BINARY SEARCH /////////////////////////////
 ///////////////////////////////////////////////////////////////////////
 

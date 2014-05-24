@@ -11,6 +11,7 @@
 #include "maxsubarray.h"
 #include "matrix.h"
 #include "heap.h"
+#include "stats.h"
 
 void matrix_multiply() {
     int A[4] = {1, 1,
@@ -39,6 +40,10 @@ int main(int argc, const char * argv[])
     
     result = maxsubarray_linear(arr, 8);
     printf("left: %d, right: %d, sum: %d\n", result.lo, result.hi, result.sum);
+    
+    printf("Minimum of the array: %d\n", stat_min(arr, 10));
+    printf("Maximum of the array: %d\n", stat_max(arr, 10));
+    printf("%d minimum of array: %d\n", 7, stat_ith_min(arr, 10, 7));
     
     int out[10] = {};
     sort_counting(arr, 10, -3, 7, out);

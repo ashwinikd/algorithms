@@ -9,6 +9,7 @@ As of now following algorithms have been implemented:
   * Bubble Sort
   * Quick Sort
   * Heap Sort
+  * Counting Sort
 * Heap
 * Misc
   * Naive matrix multiplication

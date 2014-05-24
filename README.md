@@ -27,6 +27,5 @@ them some time soon.
 * Heap which allows its capacity to be changed at runtime
 
 ## Targets
-* Documentation and comments
 * Test cases
 * Profiling
